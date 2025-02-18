@@ -1,0 +1,23 @@
+import axios from 'axios';
+
+// const API_URL = 'http://localhost:8080';
+
+export const fetchLatestPoll = async () => {
+    try {
+        const response = await axios.get(`/api/v1/polls`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching messages:', error);
+        throw error;
+    }
+};
+
+export const answerPoll = async (pollId, pollAnswerId) => {
+    try {
+        const response = await axios.post(`/api/v1/polls/${pollId}/answers`, { pollAnswerId });
+        return response.data;
+    } catch (error) {
+        console.error('Error saving message:', error);
+        throw error;
+    }
+};
