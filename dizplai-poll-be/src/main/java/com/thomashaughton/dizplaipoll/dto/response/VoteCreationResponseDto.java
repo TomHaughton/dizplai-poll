@@ -1,10 +1,10 @@
 package com.thomashaughton.dizplaipoll.dto.response;
 
 import com.thomashaughton.dizplaipoll.dto.PollStatistics;
-import com.thomashaughton.dizplaipoll.dto.UserPollAnswerDto;
+import com.thomashaughton.dizplaipoll.dto.VoteDto;
 
-public record UserPollAnswerCreationResponseDto(
-        UserPollAnswerDto answer,
+public record VoteCreationResponseDto(
+        VoteDto answer,
         PollStatistics pollStatistics
 ) {
 }

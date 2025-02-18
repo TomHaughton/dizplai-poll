@@ -22,8 +22,8 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "user_poll_answer")
-public class UserPollAnswer implements Serializable {
+@Table(name = "vote")
+public class Vote implements Serializable {
 
     @Id
     private UUID id;

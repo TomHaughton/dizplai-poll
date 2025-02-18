@@ -3,10 +3,10 @@ package com.thomashaughton.dizplaipoll.dto;
 import java.time.ZonedDateTime;
 import java.util.UUID;
 
-public record UserPollAnswerDto(
+public record VoteDto(
+        UUID id,
         UUID pollId,
         UUID selectedAnswerId,
-        UUID userAnswerId,
         ZonedDateTime createdAt
 ) {
 }
