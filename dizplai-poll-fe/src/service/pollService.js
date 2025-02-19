@@ -5,7 +5,7 @@ export const fetchLatestPoll = async () => {
         const response = await axios.get(`/api/v1/polls`);
         return response.data;
     } catch (error) {
-        console.error('Error fetching messages:', error);
+        console.error('Error fetching latest poll:', error);
         throw error;
     }
 };
@@ -15,7 +15,7 @@ export const answerPoll = async (pollId, pollAnswerId) => {
         const response = await axios.post(`/api/v1/polls/${pollId}/votes`, { pollAnswerId });
         return response.data;
     } catch (error) {
-        console.error('Error saving message:', error);
+        console.error('Error answering poll:', error);
         throw error;
     }
 };

@@ -40,8 +40,7 @@ public class PollAnalysisServiceTest {
     @MethodSource("voteAnalysisProvider")
     void shouldAnalyzeResultsCorrectly(
             final int total,
-            final List<VoteCount> voteCounts,
-            final BigDecimal expectedPercentage
+            final List<VoteCount> voteCounts
     ) {
         UUID pollId = UUID.randomUUID();
 

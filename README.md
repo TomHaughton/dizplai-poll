@@ -14,7 +14,9 @@
 * Caching is used to store the active poll and poll results.
 
 ## Running the application
-
+This application uses Java 21, if this is not installed on your machine, you may run via Docker
+1. `cd dizplai-poll-be`
+2. `java -jar target/dizplai-poll-0.0.1-SNAPSHOT.jar`
 
 # API Definition
 ### Create Poll

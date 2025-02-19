@@ -1,0 +1,34 @@
+services:
+  poll_backend:
+    build: dizplai-poll-be
+    container_name: poll-backend
+    restart: always
+    ports:
+      - 8080:8080
+    environment:
+      - spring.datasource.url=jdbc:mysql://poll-db:3306/dizplaipoll?allowPublicKeyRetrieval=true
+    depends_on:
+      - mysqldb
+
+  poll_frontend:
+    build: dizplai-poll-fe
+    container_name: poll-frontend
+    restart: always
+    ports:
+      - 3000:3000
+    depends_on:
+      - poll_backend
+
+  mysqldb:
+    image: "mysql:8.0"
+    container_name: poll-db
+    restart: always
+    ports:
+      - 3376:3306
+    environment:
+      MYSQL_DATABASE: dizplaipoll
+      MYSQL_USER: newroot
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+#    expose:
+#      - 3376
