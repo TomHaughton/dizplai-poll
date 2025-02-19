@@ -6,6 +6,7 @@ import ResultComponent from "./ResultComponent";
 const PollComponent = () => {
     const [poll, setPoll] = useState([]);
     const [stats, setStats] = useState([]);
+    const [failed, setFailed] = useState(false);
 
     useEffect(() => {
         getLatest();
@@ -15,8 +16,10 @@ const PollComponent = () => {
         try {
             const data = await fetchLatestPoll();
             setPoll(data);
+            setFailed(false);
         } catch (error) {
             console.error('Failed to fetch poll', error);
+            setFailed(true);
         }
     };
 
@@ -25,11 +28,18 @@ const PollComponent = () => {
             const data = await answerPoll(pollId, answerId);
             setStats(data);
         } catch (error) {
-            console.error('Failed to save message', error);
+            console.error('Failed to answer poll', error);
         }
     };
 
-    if (stats !== undefined && stats.length !== 0) {
+    console.log("Failed: " + failed);
+    if (failed === true) {
+        return (
+            <div>
+                <h1>Apologies, there is no active poll at this time.</h1>
+            </div>
+        );
+    } else if (stats !== undefined && stats.length !== 0) {
         return (
             <div className="poll">
                 <div className="title">

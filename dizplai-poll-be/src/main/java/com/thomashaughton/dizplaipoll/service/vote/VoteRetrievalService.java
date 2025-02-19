@@ -5,6 +5,7 @@ import com.thomashaughton.dizplaipoll.dao.entity.Vote;
 import com.thomashaughton.dizplaipoll.dao.repository.VoteRepository;
 import com.thomashaughton.dizplaipoll.dto.VoteDto;
 import com.thomashaughton.dizplaipoll.dto.response.PageableDto;
+import com.thomashaughton.dizplaipoll.enums.SortValue;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,11 +23,15 @@ public class VoteRetrievalService {
     private final VoteRepository voteRepository;
 
     @Transactional
-    public PageableDto<VoteDto> getVotes(UUID pollId, int page, int size, String sort) {
-        PageRequest pageRequest = PageRequest.of(page, size, Sort.by(new Sort.Order(Sort.Direction.valueOf(sort), "createdAt")));
+    public PageableDto<VoteDto> getVotes(UUID pollId, int page, int size, SortValue sort) {
+        PageRequest pageRequest = PageRequest.of(
+                page,
+                size,
+                Sort.by(new Sort.Order(Sort.Direction.valueOf(sort.name()), "createdAt")
+                )
+        );
         Page<Vote> answerPage = voteRepository.findUserPollAnswerByPoll_Id(pollId, pageRequest);
 
-        List<VoteDto> dtoPage = answerPage.stream().map(VoteAssembler::toDto).toList();
         return new PageableDto<VoteDto>(
                 answerPage.stream().map(VoteAssembler::toDto).toList(),
                 answerPage.getPageable().getPageNumber(),

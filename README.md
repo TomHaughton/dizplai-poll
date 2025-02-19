@@ -3,7 +3,9 @@
 ## Assumptions
 * The active poll is simply the latest created poll. Other factors could be used in a production use case.
 * Short term caching is ok for poll results, to alleviate load.
-
+* The individual answers do not need to be displayed on the frontend.
+* Auth is not required - though would be for a production system, especially when retrieving individual results
+* IP/unique user protection is not required as it would impact the testability of this on the reviewer. Though in a real world scenario we would need to build a mechanism to prevent the same user voting multiple times. This could also be provided by auth. 
 
 ## Implementation detail
 * Relational DB chosen as data is structured and structure of the data is known
@@ -11,12 +13,12 @@
     * Greater availability and write throughput
     * The strong consistency of a relational DB is not paramount here
     * There seems to not be much use case for complex queries on the data
-* Caching is used to store the active poll and poll results.
+* Caching is used to store the active poll and poll results. Poll results are cleared after 5 seconds.
+* Retrieving individual answers is a paginated response, to reduce impact of loading all data.
 
 ## Running the application
-This application uses Java 21, if this is not installed on your machine, you may run via Docker
-1. `cd dizplai-poll-be`
-2. `java -jar target/dizplai-poll-0.0.1-SNAPSHOT.jar`
+This application requires docker to be installed, for simplicity of testing
+1. `docker-compose up`
 
 # API Definition
 ### Create Poll
@@ -125,7 +127,7 @@ Response
 ### Get poll answers
 Request
 
-GET `http://localhost:8080/api/v1/polls/{{pollId}}/votes?page=21&size=10&sort=DESC`
+GET `http://localhost:8080/api/v1/polls/{{pollId}}/votes?page=21&size=10&sortValue=DESC`
 
 Response
 ```json

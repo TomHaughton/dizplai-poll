@@ -1,16 +1,7 @@
 import React from 'react';
 import { answerPoll } from '../service/pollService';
 
-const AnswerComponent = ({answer, answerId, pollId, onClick}) => {
-
-    const handleAnswerPoll = async () => {
-        try {
-            console.log(answer, answerId, pollId)
-            await answerPoll(pollId, answerId);
-        } catch (error) {
-            console.error('Failed to save message', error);
-        }
-    };
+const AnswerComponent = ({answer, onClick}) => {
 
     return (
         <div>
