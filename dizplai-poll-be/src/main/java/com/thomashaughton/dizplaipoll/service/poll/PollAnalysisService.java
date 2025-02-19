@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -35,9 +36,8 @@ public class PollAnalysisService {
                 .map(VoteCount::getVoteCount)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        List<AnswerStatistic> answerStats = voteCounts.stream()
-                .map(entry -> getAnswerStatistic(entry, total))
-                .toList();
+        Map<UUID, AnswerStatistic> answerStats = voteCounts.stream()
+                .collect(Collectors.toMap(VoteCount::getPollAnswerId, e -> getAnswerStatistic(e, total)));
         return new PollStatistics(total.longValue(), answerStats);
     }
 
@@ -46,6 +46,6 @@ public class PollAnalysisService {
                 .divide(total, 2, RoundingMode.HALF_DOWN)
                 .multiply(BigDecimal.valueOf(100))
                 .setScale(0, RoundingMode.HALF_DOWN);
-        return new AnswerStatistic(entry.getPollAnswerId(), percentage, entry.getVoteCount().longValue());
+        return new AnswerStatistic(percentage, entry.getVoteCount().longValue());
     }
 }

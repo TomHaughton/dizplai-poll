@@ -36,8 +36,8 @@ public interface VoteRepository extends JpaRepository<Vote, UUID>, PagingAndSort
     @Query(value = """
             SELECT DISTINCT bin_to_uuid(pa.id) as pollAnswerId, count(vote.id) as voteCount
                   FROM poll
-                           INNER JOIN dizplaipoll.poll_answer pa on poll.external_id = pa.poll_id
-                           left outer JOIN dizplaipoll.vote vote on pa.id = vote.poll_answer_id
+                           INNER JOIN poll_answer pa on poll.external_id = pa.poll_id
+                           left outer JOIN vote vote on pa.id = vote.poll_answer_id
                   WHERE poll.external_id = ?1
                   GROUP BY pa.id
             """,

@@ -6,6 +6,7 @@ import com.thomashaughton.dizplaipoll.dao.entity.Poll;
 import com.thomashaughton.dizplaipoll.dao.entity.PollAnswer;
 import com.thomashaughton.dizplaipoll.dao.repository.PollRepository;
 import com.thomashaughton.dizplaipoll.dto.PollAnswerDto;
+import com.thomashaughton.dizplaipoll.dto.request.PollAnswerCreationDto;
 import com.thomashaughton.dizplaipoll.dto.request.PollCreationRequestDto;
 import com.thomashaughton.dizplaipoll.dto.PollDto;
 import lombok.RequiredArgsConstructor;
@@ -32,7 +33,7 @@ public class PollCreationService {
         return PollAssembler.toDto(save);
     }
 
-    private List<PollAnswer> buildAnswers(List<PollAnswerDto> pollAnswerDtos, Poll poll) {
+    private List<PollAnswer> buildAnswers(List<PollAnswerCreationDto> pollAnswerDtos, Poll poll) {
         return pollAnswerDtos.stream()
                 .map(dto ->
                         PollAnswer.builder()

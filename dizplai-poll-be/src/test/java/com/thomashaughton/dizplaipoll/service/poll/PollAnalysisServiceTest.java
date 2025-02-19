@@ -78,12 +78,9 @@ public class PollAnalysisServiceTest {
 
         Assertions.assertAll(() -> {
             Assertions.assertEquals(11L, pollStatistics.total());
-            Assertions.assertEquals(BigDecimal.valueOf(9), pollStatistics.answerStatistics().stream()
-                    .filter(stat -> stat.answerId() == ANSWER_1_ID).findFirst().get().percentage());
-            Assertions.assertEquals(BigDecimal.valueOf(91), pollStatistics.answerStatistics().stream()
-                    .filter(stat -> stat.answerId() == ANSWER_2_ID).findFirst().get().percentage());
-            Assertions.assertEquals(BigDecimal.valueOf(0), pollStatistics.answerStatistics().stream()
-                    .filter(stat -> stat.answerId() == ANSWER_3_ID).findFirst().get().percentage());
+            Assertions.assertEquals(BigDecimal.valueOf(9), pollStatistics.answerStatistics().get(ANSWER_1_ID).percentage());
+            Assertions.assertEquals(BigDecimal.valueOf(91), pollStatistics.answerStatistics().get(ANSWER_2_ID).percentage());
+            Assertions.assertEquals(BigDecimal.valueOf(0), pollStatistics.answerStatistics().get(ANSWER_3_ID).percentage());
         });
     }
 

@@ -1,0 +1,17 @@
+#spring:
+#  application:
+#    name: dizplai-poll
+#  datasource:
+#    driverClassName: org.testcontainers.jdbc.ContainerDatabaseDriver
+#    url: jdbc:tc:mysql:8.0.36:///dizplaipoll
+#    username: root
+#    password: test
+#    hikari:
+#      connection-timeout: 30000
+#      data-source-properties:
+#        socketTimeout: 45000
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    open-in-view: false
+#    database-platform: org.hibernate.dialect.MySQLDialect

@@ -37,14 +37,12 @@ const PollComponent = () => {
                 </div>
                 <div className="answer-container">
                     {poll.answers.map((answer) =>
-                        stats.pollStatistics.answerStatistics.filter((stat) => stat.answerId === answer.id)
-                            .map((stat) => (
-                                    <div key={stat.answerId}><ResultComponent answer={answer.answer}
-                                                                              answerId={stat.answerId}
-                                                                              percentage={stat.percentage}/></div>
-                                )
-                            ))
-                    }
+                        <div key={answer.id}>
+                            <ResultComponent answer={answer.answer}
+                                             answerId={answer.id}
+                                             percentage={stats.pollStatistics.answerStatistics[answer.id].percentage}/>
+                        </div>
+                    )}
                 </div>
             </div>
         );

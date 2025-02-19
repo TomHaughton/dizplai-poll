@@ -5,6 +5,7 @@ import com.thomashaughton.dizplaipoll.dto.request.PollCreationRequestDto;
 import com.thomashaughton.dizplaipoll.dto.response.PollCreationResponseDto;
 import com.thomashaughton.dizplaipoll.service.poll.PollCreationService;
 import com.thomashaughton.dizplaipoll.service.poll.PollRetrievalService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,7 @@ public class PollController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public PollCreationResponseDto createPoll(@RequestBody PollCreationRequestDto request) {
+    public PollCreationResponseDto createPoll(@RequestBody @Valid PollCreationRequestDto request) {
         return new PollCreationResponseDto(pollCreationService.createPoll(request));
     }
 

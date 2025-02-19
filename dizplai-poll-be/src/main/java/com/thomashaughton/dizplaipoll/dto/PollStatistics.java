@@ -1,9 +1,10 @@
 package com.thomashaughton.dizplaipoll.dto;
 
-import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public record PollStatistics(
         Long total,
-        List<AnswerStatistic> answerStatistics
+        Map<UUID, AnswerStatistic> answerStatistics
 ) {
 }
