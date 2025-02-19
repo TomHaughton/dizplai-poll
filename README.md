@@ -1,9 +1,20 @@
 # Dizplai Polling Technical Task
 
+## Assumptions
+* The active poll is simply the latest created poll. Other factors could be used in a production use case.
+* Short term caching is ok for poll results, to alleviate load.
+
+
 ## Implementation detail
-* Relational DB chosen a data is structured and structure of the data is known
-  * NoSQL DB could have been a valid option here too for its greater availability and write throughput
-* Caching used to reduce load on DB each time vote is cast
+* Relational DB chosen as data is structured and structure of the data is known
+  * NoSQL DB could also have been a valid option for the following reasons: 
+    * Greater availability and write throughput
+    * The strong consistency of a relational DB is not paramount here
+    * There seems to not be much use case for complex queries on the data
+* Caching is used to store the active poll and poll results.
+
+## Running the application
+
 
 # API Definition
 ### Create Poll
@@ -72,25 +83,39 @@ Response
 ```json
 {
   "answer": {
-    "pollId": "0070ea2c-f956-42d1-a71c-8c3829b64a92",
-    "selectedAnswerId": "25279613-faa8-4f64-86c2-f788d5f78b90",
-    "userAnswerId": "5ba8bc88-3ef8-471d-952f-ad2af2cecc19",
-    "createdAt": "2025-02-14T16:50:27.391816Z"
+    "id": "4f46d7a6-049e-4f10-a5db-21337be3c29b",
+    "pollId": "bf2f24fa-6bb0-4513-9dbe-b295770cf47a",
+    "selectedAnswerId": "389461aa-8044-435d-b49d-1a539bd74f63",
+    "createdAt": "2025-02-19T13:31:10.370068Z"
   },
   "pollStatistics": {
-    "total": 216,
-    "answerStatistics": [
-      {
-        "answerId": "25279613-faa8-4f64-86c2-f788d5f78b90",
-        "percentage": 55,
-        "total": 119
+    "total": 1,
+    "answerStatistics": {
+      "c01c92f9-f916-4b18-850c-70fd9317c1ed": {
+        "percentage": 0,
+        "total": 0
       },
-      {
-        "answerId": "f94cf811-a80e-471c-921f-9f36bd7ce666",
-        "percentage": 45,
-        "total": 97
+      "1a37c3a6-789c-4e1b-a6d4-6defd737da9b": {
+        "percentage": 0,
+        "total": 0
+      },
+      "3ef77f83-bfa8-4679-9134-0cdb26cf30d1": {
+        "percentage": 0,
+        "total": 0
+      },
+      "492f0e59-6c55-4f6d-be9a-ca666c8ce2f7": {
+        "percentage": 0,
+        "total": 0
+      },
+      "b6a0dd11-945f-4130-8bce-000d72331594": {
+        "percentage": 0,
+        "total": 0
+      },
+      "389461aa-8044-435d-b49d-1a539bd74f63": {
+        "percentage": 100,
+        "total": 1
       }
-    ]
+    }
   }
 }
 ```
