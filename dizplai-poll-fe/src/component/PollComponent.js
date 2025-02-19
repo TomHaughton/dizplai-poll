@@ -35,8 +35,10 @@ const PollComponent = () => {
     console.log("Failed: " + failed);
     if (failed === true) {
         return (
-            <div>
-                <h1>Apologies, there is no active poll at this time.</h1>
+            <div className="poll">
+                <div className="title">
+                    <h1>Apologies, there is no active poll at this time.</h1>
+                </div>
             </div>
         );
     } else if (stats !== undefined && stats.length !== 0) {

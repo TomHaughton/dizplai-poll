@@ -23,6 +23,7 @@ This application requires docker to be installed, for simplicity of testing
 # API Definition
 ### Create Poll
 Request
+
 POST `http://localhost:8080/api/v1/polls`
 ```json
 {
